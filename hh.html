@@ -1,0 +1,574 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Surprise for Lakshita 💜</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap');
+
+:root {
+  --purple: #8052a8;
+  --lavender: #eadcff;
+  --ink: #241a31;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  font-family: "DM Sans", sans-serif;
+  background: #090611;
+}
+button,input,textarea { font: inherit; }
+button { cursor: pointer; }
+
+.screen {
+  min-height: 100vh;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 22px 14px;
+}
+.screen.active { display: flex; }
+
+.entrance-card {
+  width: min(100%, 690px);
+  padding: clamp(28px,6vw,58px) clamp(20px,6vw,56px);
+  border-radius: 34px;
+  text-align: center;
+  background: linear-gradient(145deg,#f4eaff,#e7d5ff 55%,#f6e8ff);
+  box-shadow: 0 20px 80px #a36bd633;
+  position: relative;
+  overflow: hidden;
+  animation: rise .8s ease both;
+}
+.entrance-card::before,.entrance-card::after {
+  content: "✦  ✧  ⋆  ✦  ˚  ✧";
+  position: absolute;
+  color: #a77bca88;
+  letter-spacing: 13px;
+  font-size: 19px;
+  pointer-events: none;
+}
+.entrance-card::before { top: 18px; left: 18px; }
+.entrance-card::after { bottom: 16px; right: 14px; }
+
+.tiny-kicker {
+  color: #9670b5;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+.entrance-title {
+  margin: 22px 0 8px;
+  color: var(--purple);
+  font-size: clamp(34px,8vw,57px);
+  line-height: 1.08;
+  font-weight: 800;
+}
+.entrance-subtitle {
+  margin: 18px 0 20px;
+  color: #9a70bd;
+  font-size: clamp(23px,5vw,38px);
+  line-height: 1.2;
+  font-weight: 800;
+}
+.intro-line {
+  margin: 24px 0 30px;
+  color: #806d91;
+  font-size: clamp(15px,3.8vw,21px);
+  font-weight: 600;
+}
+.password-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 440px;
+  margin: 0 auto;
+  padding: 7px 8px 7px 18px;
+  border: 1px solid #c9addf;
+  border-radius: 18px;
+  background: #fff9ff;
+}
+.password-wrap input {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #4c3264;
+  padding: 10px 0;
+  font-size: 16px;
+}
+.eye-btn {
+  border: 0;
+  border-radius: 12px;
+  padding: 9px 11px;
+  color: #79549a;
+  background: #f0e3fb;
+}
+.primary-btn {
+  border: 0;
+  border-radius: 16px;
+  padding: 14px 25px;
+  color: white;
+  background: linear-gradient(135deg,#a879ca,#7950a2);
+  font-weight: 800;
+  box-shadow: 0 9px 22px #8052a844;
+  transition: transform .2s;
+}
+.primary-btn:hover { transform: translateY(-2px); }
+.unlock-btn { width: min(100%,440px); margin-top: 15px; }
+.error {
+  min-height: 24px;
+  margin: 12px 0 0;
+  color: #a33c70;
+  font-size: 14px;
+  font-weight: 700;
+}
+.scroll-hint {
+  margin: 28px 0 0;
+  color: #9b7ab6;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* SECOND PAGE */
+#birthdayPage {
+  display: none;
+  min-height: 100vh;
+  background: linear-gradient(180deg,#f5eaff,#eadcff 48%,#f8eafa);
+  overflow: hidden;
+  position: relative;
+}
+#birthdayPage.active { display: block; }
+.page-content {
+  position: relative;
+  z-index: 2;
+  width: min(100% - 28px,760px);
+  margin: 0 auto;
+  padding: 48px 0 70px;
+  text-align: center;
+}
+.birthday-heading {
+  margin: 0 0 9px;
+  color: #8052a8;
+  font-size: clamp(32px,7vw,56px);
+  line-height: 1.12;
+  font-weight: 800;
+}
+.birthday-sub {
+  color: #9675ad;
+  font-size: clamp(15px,3.8vw,19px);
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+.cake-stage {
+  min-height: 290px;
+  display: grid;
+  place-items: center;
+  position: relative;
+  margin: 0 auto 8px;
+  overflow: hidden;
+}
+.cake {
+  font-size: clamp(130px,32vw,205px);
+  line-height: 1;
+  filter: drop-shadow(0 17px 14px #8b5cad33);
+  animation: cakeFloat 3s ease-in-out infinite;
+  z-index: 2;
+}
+.cake-glow {
+  position: absolute;
+  width: 240px;
+  height: 100px;
+  bottom: 26px;
+  background: #d9b4f4;
+  filter: blur(35px);
+  border-radius: 50%;
+}
+
+/* FLOATING BALLOONS */
+.balloon {
+  position: absolute;
+  bottom: -160px;
+  width: 48px;
+  height: 62px;
+  border-radius: 50% 50% 46% 46%;
+  opacity: .82;
+  animation: floatUp 13s linear infinite;
+  box-shadow: inset -8px -7px 0 #5c397b16,inset 8px 6px 0 #ffffff55;
+}
+.balloon::before {
+  content: "";
+  position: absolute;
+  bottom: -7px;
+  left: 19px;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 8px solid currentColor;
+}
+.balloon::after {
+  content: "";
+  position: absolute;
+  top: 68px;
+  left: 23px;
+  width: 1px;
+  height: 85px;
+  background: #9c7caf88;
+}
+.b1 { left: 7%; background: #d7b8fa; color: #d7b8fa; animation-delay: 0s; }
+.b2 { left: 24%; background: #f5c6e6; color: #f5c6e6; animation-delay: 4s; }
+.b3 { right: 20%; background: #c6d6ff; color: #c6d6ff; animation-delay: 2s; }
+.b4 { right: 5%; background: #e7c2fa; color: #e7c2fa; animation-delay: 6s; }
+
+.sparkle {
+  position: absolute;
+  color: #a77acb;
+  animation: twinkle 2s ease-in-out infinite alternate;
+  font-size: 23px;
+}
+.s1 { top: 20%; left: 17%; }
+.s2 { top: 15%; right: 15%; animation-delay: .8s; }
+.s3 { bottom: 20%; left: 27%; animation-delay: 1.2s; }
+.s4 { bottom: 23%; right: 25%; animation-delay: .4s; }
+
+.gift-card,.letter-card,.rating-card {
+  width: min(100%,650px);
+  margin: 26px auto 0;
+  padding: clamp(22px,5vw,36px);
+  border: 1px solid white;
+  border-radius: 28px;
+  background: #fffaffd9;
+  box-shadow: 0 15px 40px #8c63aa20;
+  backdrop-filter: blur(8px);
+}
+.gift-icon {
+  font-size: 66px;
+  display: inline-block;
+  animation: giftBounce 2.2s ease-in-out infinite;
+}
+.gift-title {
+  margin: 10px 0 8px;
+  color: #79509e;
+  font-size: clamp(24px,5vw,31px);
+  font-weight: 800;
+}
+.gift-copy { color: #8b759c; margin-bottom: 20px; }
+
+.letter-card {
+  display: none;
+  text-align: left;
+  color: #554366;
+  line-height: 1.8;
+  animation: rise .65s ease both;
+  background: linear-gradient(145deg,#fffaff,#f7edff);
+}
+.letter-card.show { display: block; }
+.letter-card h2 {
+  color: #8052a8;
+  text-align: center;
+  font-family: "Playfair Display",Georgia,serif;
+  font-size: clamp(27px,6vw,36px);
+  margin-bottom: 22px;
+}
+.letter-card p { margin: 0 0 15px; }
+.letter-sign {
+  margin-top: 22px;
+  text-align: right;
+  color: #8052a8;
+  font-weight: 800;
+  font-size: 20px;
+  line-height: 1.4;
+}
+.letter-sign small {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #997db0;
+}
+
+/* RATING */
+.rating-card { margin-top: 24px; }
+.rating-title {
+  color: #8052a8;
+  font-size: 25px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+.rating-copy { color: #8b759c; }
+.stars {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 17px 0;
+}
+.star {
+  border: 0;
+  background: transparent;
+  color: #d5c4e3;
+  font-size: clamp(35px,9vw,47px);
+  padding: 0 2px;
+  transition: transform .15s,color .15s;
+}
+.star.selected { color: #f3b94f; transform: scale(1.12); }
+.feedback {
+  width: 100%;
+  min-height: 95px;
+  resize: vertical;
+  border: 1px solid #d9c4e9;
+  border-radius: 15px;
+  padding: 13px;
+  color: #554366;
+  background: white;
+  outline-color: #a77acb;
+}
+.rating-submit { margin-top: 14px; }
+.thanks-note {
+  min-height: 23px;
+  color: #8052a8;
+  font-weight: 700;
+  margin: 12px 0 0;
+}
+.footer { margin-top: 30px; color: #9b7db1; font-size: 13px; }
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes cakeFloat {
+  0%,100% { transform: translateY(0) rotate(-1deg); }
+  50% { transform: translateY(-10px) rotate(1deg); }
+}
+@keyframes floatUp {
+  0% { transform: translateY(0) rotate(-5deg); }
+  100% { transform: translateY(-120vh) rotate(9deg); }
+}
+@keyframes twinkle {
+  from { opacity: .35; transform: scale(.8); }
+  to { opacity: 1; transform: scale(1.2) rotate(20deg); }
+}
+@keyframes giftBounce {
+  0%,100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-7px) rotate(2deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,*::before,*::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- PAGE 1: PASSWORD -->
+<section id="entrancePage" class="screen active">
+  <main class="entrance-card">
+    <div class="tiny-kicker">A tiny surprise is waiting</div>
+    <h1 class="entrance-title">OYE GADHAV!! 🫏</h1>
+    <div class="entrance-subtitle">Here's a surprise for you! 💜</div>
+    <p class="intro-line">Yes, Lakshita. This one's especially for you.</p>
+
+    <form id="passwordForm">
+      <div class="password-wrap">
+        <input id="passwordInput" type="password"
+          placeholder="Enter the secret word..."
+          autocomplete="off" aria-label="Secret word">
+        <button class="eye-btn" type="button" id="togglePassword">👁</button>
+      </div>
+      <button class="primary-btn unlock-btn" type="submit">
+        Unlock your surprise ✨
+      </button>
+      <p class="error" id="passwordError" aria-live="polite"></p>
+    </form>
+
+    <p class="scroll-hint">Only you can open this little surprise ♡</p>
+  </main>
+</section>
+
+<!-- PAGE 2: BIRTHDAY SURPRISE -->
+<main id="birthdayPage">
+  <div class="balloon b1"></div>
+  <div class="balloon b2"></div>
+  <div class="balloon b3"></div>
+  <div class="balloon b4"></div>
+
+  <div class="page-content">
+    <div class="tiny-kicker">Today is all about you</div>
+    <h1 class="birthday-heading">Happy Birthday Lakshita 🎂</h1>
+    <p class="birthday-sub">
+      Wishing the happiest day to my favourite donkey! 💜
+    </p>
+
+    <section class="cake-stage">
+      <div class="cake-glow"></div>
+      <span class="sparkle s1">✦</span>
+      <span class="sparkle s2">✧</span>
+      <span class="sparkle s3">✦</span>
+      <span class="sparkle s4">✧</span>
+      <div class="cake">🎂</div>
+    </section>
+
+    <section class="gift-card">
+      <div class="gift-icon">🎁</div>
+      <h2 class="gift-title">A MESSAGE FOR YOU 💌</h2>
+      <p class="gift-copy">
+        A little something made just for you. Tap below to open it!
+      </p>
+      <button class="primary-btn" id="openLetterBtn" type="button">
+        Open your surprise 💜
+      </button>
+    </section>
+
+    <!-- BIRTHDAY LETTER -->
+    <article class="letter-card" id="letterCard">
+      <h2>A little letter for you ♡</h2>
+
+      <p><strong>Dear Lakshita, 💜</strong></p>
+
+      <p>First of all, HAPPY BIRTHDAY, YOU DONKEY!! 🫏😂🎂</p>
+
+      <p>Honestly, I don't know where to begin. You're not just a friend to me; you're a sister I got without sharing the same blood. Someone with whom I can share almost everything, talk about absolute nonsense, discuss serious things and be completely myself.</p>
+
+      <p>One thing I genuinely love about our bond is the trust we share. The kind of trust where we can share things without hesitation, keep each other's secrets and know that we have someone we can count on. That's something I truly value, and I hope it always stays the same. 🥹❤️</p>
+
+      <p>I'm genuinely grateful to have you in my life. Thank you for listening, understanding, supporting me and being there. Thank you for all the random conversations, laughter, silly arguments and countless little moments that make our bond special.</p>
+
+      <p>I might tease you, irritate you and call you a donkey all the time, but you know there's a lot of love and care behind all that. 😂</p>
+
+      <p>I hope life gives you all the happiness, success, peace and beautiful moments you deserve. Never stop smiling, keep chasing your dreams and always remember how special you are.</p>
+
+      <p>No matter how much life changes or how busy we get, I hope we never lose this bond. Some people aren't related by blood but still become family, and you're one of those people for me. 🫂💜</p>
+
+      <p>Once again, HAPPY BIRTHDAY, LAKSHITA!! 🎀</p>
+
+      <p>Stay happy, stay blessed and keep shining. And please, try behaving like a human sometimes instead of a donkey. 😭😂</p>
+
+      <div class="letter-sign">
+        Love you! ❤️
+        <small>(Maybe not more than him 😁)</small>
+      </div>
+    </article>
+
+    <!-- RATING -->
+    <section class="rating-card">
+      <h2 class="rating-title">Rate this surprise ⭐</h2>
+      <p class="rating-copy">So, donkey... how did I do? 😂</p>
+
+      <div class="stars">
+        <button class="star" type="button" data-rating="1">★</button>
+        <button class="star" type="button" data-rating="2">★</button>
+        <button class="star" type="button" data-rating="3">★</button>
+        <button class="star" type="button" data-rating="4">★</button>
+        <button class="star" type="button" data-rating="5">★</button>
+      </div>
+
+      <textarea class="feedback" id="feedback"
+        placeholder="Write something (optional)..."></textarea>
+
+      <button class="primary-btn rating-submit" id="submitRating" type="button">
+        Send my rating 💌
+      </button>
+      <p class="thanks-note" id="ratingThanks" aria-live="polite"></p>
+    </section>
+
+    <p class="footer">Made with lots of care, just for you. 💜</p>
+  </div>
+</main>
+
+<script>
+// PASSWORD — all lowercase
+const SECRET_WORD = "ansh n lakshita";
+
+const entrancePage = document.getElementById("entrancePage");
+const birthdayPage = document.getElementById("birthdayPage");
+const passwordInput = document.getElementById("passwordInput");
+const passwordError = document.getElementById("passwordError");
+
+// SHOW / HIDE PASSWORD
+document.getElementById("togglePassword").addEventListener("click", () => {
+  const hidden = passwordInput.type === "password";
+  passwordInput.type = hidden ? "text" : "password";
+  document.getElementById("togglePassword").textContent =
+    hidden ? "🙈" : "👁";
+});
+
+// UNLOCK PAGE
+document.getElementById("passwordForm").addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  const entered = passwordInput.value.trim().toLowerCase();
+
+  if (entered === SECRET_WORD) {
+    entrancePage.classList.remove("active");
+    entrancePage.style.display = "none";
+    birthdayPage.classList.add("active");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  } else {
+    passwordError.textContent =
+      "Oops! Wrong secret word, gadhav. Try again! 🫏";
+    passwordInput.value = "";
+    passwordInput.focus();
+  }
+});
+
+// OPEN THE LETTER
+document.getElementById("openLetterBtn").addEventListener("click", () => {
+  const letter = document.getElementById("letterCard");
+  letter.classList.add("show");
+
+  const button = document.getElementById("openLetterBtn");
+  button.textContent = "Your letter is open 💜";
+  button.disabled = true;
+
+  letter.scrollIntoView({ behavior: "smooth", block: "start" });
+});
+
+// STAR RATING
+let selectedRating = 0;
+const starButtons = document.querySelectorAll(".star");
+
+starButtons.forEach((star) => {
+  star.addEventListener("click", () => {
+    selectedRating = Number(star.dataset.rating);
+
+    starButtons.forEach((item) => {
+      item.classList.toggle(
+        "selected",
+        Number(item.dataset.rating) <= selectedRating
+      );
+    });
+
+    document.getElementById("ratingThanks").textContent =
+      `You selected ${selectedRating} out of 5 stars! 💜`;
+  });
+});
+
+// SUBMIT RATING
+document.getElementById("submitRating").addEventListener("click", () => {
+  const message = document.getElementById("feedback").value.trim();
+  const thanks = document.getElementById("ratingThanks");
+
+  if (!selectedRating) {
+    thanks.textContent = "Choose your stars first, donkey! 😂";
+    return;
+  }
+
+  thanks.textContent =
+    "Thank you for rating the surprise, Lakshita! 💜";
+
+  // This demo only logs the rating in the browser console.
+  // It does not send the rating to your phone or save it online.
+  console.log("Rating:", selectedRating, "Feedback:", message);
+});
+</script>
+
+</body>
+</html>
